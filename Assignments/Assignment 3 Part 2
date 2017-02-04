@@ -1,0 +1,46 @@
+#include <iostream>
+#include <iomanip>
+#include <fstream>  
+#include <cstring>
+//Assignment 3 problem 2
+//reads a file named text.txt,
+//within the project folder
+//program will display the # of 
+//uppercase, lowercase, and digits 
+//in the file
+using namespace std;
+
+int main() {
+
+	//char inputdata[2000];
+	int data;
+	int uppercount=0,lowercount=0,digitcount=0;
+
+	ifstream txtFile;
+	txtFile.open("text.txt");
+
+	if(!txtFile){
+		cout << "File does not exist" << endl;}
+
+	else{
+		int i =0;
+		while (!txtFile.eof()) {
+			// char inputdata=fin.get();
+			data = txtFile.get();
+			//cout<<inputdata[i];
+			if ( isupper(data))
+				uppercount++;
+			if ( islower(data))
+				lowercount++;
+			if ( isdigit(data))
+				digitcount++;
+
+			i++;
+		}
+			cout<<"file opened was "<<"text.txt"<<endl;
+			cout<<"The number of uppercase letters in the text is "<<uppercount<<endl;
+			cout<<"The number of lowercase letters in the text is "<<lowercount<<endl;
+			cout<<"The number of digits in the text is "<<digitcount<<endl;
+	}
+}
+
