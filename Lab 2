@@ -1,0 +1,42 @@
+
+#define _USE_MATH_DEFINES
+#include <iostream>
+#include <iomanip>
+#include <string> 
+using namespace std;
+	// Lab 2 question 1
+
+int main ()
+{     cout << "Lab#2 - Part 1" << endl << "---------------" << endl <<endl;
+  double calories;
+  double percentagecal;
+  double gramsfat;
+  double fatcalories;
+
+      cout << "How many calories in the food? ";
+		 cin >> calories ;
+		 cout << endl ;
+
+	if (calories <0)
+	cout << "The amount of calories must be greater than zero\n\n";
+	else{
+	cout << "How many grams of fat in the food? ";
+		cin >> gramsfat;
+		cout << endl ;
+
+	 if (gramsfat <0)
+	cout << "The amount of grams of fat must be greater than zero\n\n";
+	 else{
+fatcalories = gramsfat * 9.0;
+setprecision(2);
+percentagecal= fatcalories/ calories * 100.00;
+
+  if (fatcalories > calories)
+	  cout << "Error: There are more calories from fat than total calories\n\n" ;
+  else{
+ if(percentagecal < 30)
+     cout << "The food is low in fat"<< endl;
+
+  cout<< "The percentage of fat in the food is: " << percentagecal << " %\n\n" ;
+  }	}}
+}
