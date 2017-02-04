@@ -1,0 +1,32 @@
+
+#include <iostream>
+#include <iomanip>
+#define _USE_MATH_DEFINES
+#include <math.h>
+using namespace std;
+
+// Lab 4, Problem 1 --- Kevin Ziemba
+// reference passing --- &volume , &circumference
+// Program will ask for the radius in meters
+// using function calcMetrics ,
+// radius, circumference, and volume
+// will be calculated + output
+double calcMetrics(double radius,double &volume,double &circumference);
+
+int main(){
+	double radius, volume, circumfrence;
+	cout<<"Enter a radius (m) for a sphere and circle : ";
+	cin >>radius;
+	volume,circumference=calcMetrics(radius,volume,circumference);
+	cout<<"The radius entered was : "<<radius<< " m \n";
+	cout<<"The volume of a sphere with this radius is : "<<volume<< " m^3 \n";
+	cout<<"The circumference of a circle with this radius is : "<<circumference<< " m \n";
+}
+
+double calcMetrics(double radius,double &volume,double &circumference){
+
+volume = M_PI *4/3*(pow(radius,2));
+circumference = 2 * M_PI * radius;
+
+return( volume, circumference);
+}
