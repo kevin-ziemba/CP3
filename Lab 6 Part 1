@@ -1,0 +1,72 @@
+#include <iostream>
+#include <iomanip>
+#include <cstring>
+#include <string.h>
+#include <string>
+using namespace std;
+/* Lab 6 part 1, weather
+store these values for the months
+total rainfall
+high temp
+low temp
+avg temp
+display several stats for the year
+*/
+struct weatherData{
+	double totalRainfall;
+	double highTemp;
+	double  lowTemp;
+	double avgtemp;
+};
+
+int main(){
+
+	double yearHighestT=-100,yearLowestT=140,AvgRainfall,totalrainfall=0;
+	int lowMonth, highMonth;
+	string monthName[12];
+	monthName[0] = "January",	monthName[1] = "February",	monthName[2] = "March",
+	monthName[3] = "April",		monthName[4] = "May",		monthName[5] = "June",
+	monthName[6] = "July",		monthName[7] = "August",	monthName[8] = "September",
+	monthName[9] = "October",	monthName[10] = "November",	monthName[11] = "December";
+	
+	weatherData w[12];
+
+	for(int i=0;i<12;i++){
+
+	cout<<"enter the total rainfall for "<<monthName[i]<<" : "; 
+	cin>>w[i].totalRainfall;
+
+		do{  // HIGH
+		cout<<"enter the high temperature for "<<monthName[i]<<" in fahrenheit (-100 - 140 F) : ";
+		cin>>w[i].highTemp;
+		}while(w[i].highTemp<-100 || w[i].highTemp>140);
+			if(w[i].highTemp > yearHighestT){
+			yearHighestT = w[i].highTemp;
+			highMonth = i;}
+
+
+		do{  // LOW
+		cout<<"enter the low temperature  for "<<monthName[i]<<" in fahrenheit (-100 - 140 F) : ";
+		cin>> w[i].lowTemp;
+		}while(w[i].highTemp<-100 || w[i].highTemp>140);
+			if(w[i].lowTemp < yearLowestT){
+			yearLowestT = w[i].lowTemp;
+			lowMonth = i;}
+
+
+	w[i].avgtemp = (w[i].highTemp + w[i].highTemp) /2;     // monthly avg temp
+
+	totalrainfall = totalrainfall + w[i].totalRainfall;   // total rainfall year
+	}//for loop
+	
+	AvgRainfall = totalrainfall / 12;   // avg rainfall year
+	
+	for(int i=0;i<12;i++){
+	cout<<"The average temperature for the month"<<monthName[i]<<" was "<<w[i].avgtemp<<" F"<< endl;
+	}
+	cout<<"The average monthly rainfall for the year was"<<AvgRainfall<<endl;
+	cout<<"The total rainfall for the year was"<<totalrainfall<< endl;
+	cout<<"The highest temperature of "<<yearHighestT<<" F occured in "<<monthName[highMonth];
+	cout<<"The lowest temperature of "<<yearLowestT<<" F occured in "<<monthName[lowMonth];
+
+}
