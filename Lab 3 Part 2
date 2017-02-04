@@ -1,0 +1,24 @@
+#include <iomanip>
+#include <iostream>
+// Lab 3 part 2 ----- Kevin Ziemba ####
+// program will ask for the mass and the velocity
+// of an object
+// program will output the kinetic energy
+using namespace std;
+
+double KinecticEnergy (double mass,double velocity);
+double KE,mass,velocity;
+int main() {
+
+	cout<<"Enter the mass of the object (kg) : ";
+	cin>>mass;
+	cout<<"\nEnter the velocity of the object (m/s) : ";
+	cin>>velocity;
+	
+	cout<<"\n\nThe kinetic energy of the object is "<<KinecticEnergy(mass,velocity)
+		<<" Joules\n";
+}
+double KinecticEnergy (double mass,double velocity){
+	KE= 0.5 * mass * pow(velocity,2);
+	return KE;
+}
