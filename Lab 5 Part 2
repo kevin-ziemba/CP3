@@ -1,0 +1,55 @@
+
+#include <iostream>
+#include <iomanip>
+#include <cstring>
+#include <cctype>
+
+using namespace std;
+//Lab 5 part 2
+// Password Verification
+//Program will ask for a password until a valid password is entered
+//password must have: Uppercase,Lowercase,digit,6 in length
+//-------------------------------------
+int main(){
+	
+		bool checkUpper, checkLower, checkDigit, checkAll, checkLength;
+	char password[21];
+	int passwordLength;
+	
+	do{
+	cout<<"Enter a password to use : ";
+	cin>>password;
+		
+		
+		for (int i=0; i < (strlen(password)) ; i++){
+			if(i==0){
+			checkLength= false,
+			checkUpper=false; checkLower=false;
+			checkDigit =false; checkAll = false;}
+
+		if(strlen(password) >= 6)
+			checkLength =true;
+		if (isupper(password[i]))
+			checkUpper=true;
+		if (islower(password[i]))
+			checkLower=true;
+		if (isdigit(password[i]))
+			checkDigit=true;
+		}
+		if (!checkUpper)
+			cout<<"- At least one character must be uppercase"<<endl;
+		if (!checkLower)
+			cout<<"- At least one character must be lowercase"<<endl;
+		if (!checkDigit)
+			cout<<"- At least one character must be a digit"<<endl;
+		if (!checkLength)
+			cout<<"- Password must be at least 6 character long "<<endl;
+		if(checkLength && checkDigit && checkLower && checkUpper)
+			checkAll = true;
+		if (checkAll){
+			cout<<"The password is valid \n";}
+		if (!checkAll){ 
+			cout<<"The password is invalid \n=======================\n";}
+	}while(!checkAll);
+}
+
