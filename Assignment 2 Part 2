@@ -1,0 +1,64 @@
+#include <iomanip>
+#include <iostream>
+#include <time.h>
+using namespace std;
+
+// Assignment 2 problem 2
+//Reliability Calculator
+//Program will ask for reliability
+//of 3 components and # of simulations
+// Analytic and Simulated Reliabilty will be output
+
+bool isComponentWorking(double reliability) ;
+bool isParallelWorking(bool isP2working,bool isP3working);
+
+int main(){
+
+	srand(time(0));
+		double reliabilityP1,reliabilityP2,reliabilityP3,Parallel,simulations;
+		bool isP1working, isP2working, isP3working;
+	cout<<"Enter the reliabiltiy value for component one : ";
+	cin>>reliabilityP1;
+	cout<<"Enter the reliabiltiy value for component two : ";
+	cin>>reliabilityP2;
+	cout<<"Enter the reliabiltiy value for component three : ";
+	cin>>reliabilityP3;
+	cout<<"Enter the number of simulations : ";
+	cin>>simulations;
+
+
+	double WorkingSimulations = 0;
+	for(int i=0 ;i < simulations; i++){
+		isP1working = isComponentWorking(reliabilityP1);
+		isP2working = isComponentWorking(reliabilityP2);
+		isP3working = isComponentWorking(reliabilityP3);
+
+		if(isP1working == true && isParallelWorking( isP2working, isP3working)==true){
+			 WorkingSimulations = WorkingSimulations +1 ;
+		}
+	
+	}
+	cout<<"\nThe reliability of component one is   : "<<reliabilityP1;
+	cout<<"\nThe reliability of component two is   : "<<reliabilityP2;
+	cout<<"\nThe reliability of component three is : "<<reliabilityP3<<endl;
+	double analyticReliability =( reliabilityP1 * ( 1 -  (1 - reliabilityP2)*(1 - reliabilityP3) ) );
+		cout<<"The analytic reliability is : "<<analyticReliability<<endl;
+
+	double simulatedReliabilty = WorkingSimulations / simulations;
+	cout<<"The simulated reliability given "<<simulations<<" simulations is "<<
+		simulatedReliabilty<<endl;
+}
+
+bool isComponentWorking(double reliability){
+	double random = ((double) rand() / (RAND_MAX));
+	//cout<<random<<endl;
+	if( random <= reliability){
+		return true;}
+	else{return false;};
+}
+
+bool isParallelWorking(bool isP2working,bool isP3working){
+	if (isP2working==true || isP3working ==true){
+		return true;}
+	else{ return false;}
+}
