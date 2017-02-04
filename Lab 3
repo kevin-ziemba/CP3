@@ -1,0 +1,55 @@
+#include<iostream>
+#include <iomanip>
+#define _USE_MATH_DEFINES
+#include <math.h>
+//lab 3 problem 1
+//user inputs initial, incremental, and ending values
+
+
+double VolumeSphere(double currentRadius);
+bool validateloop(double initialRadius, double increment, double endRadius);
+using namespace std;
+
+int main(){
+
+	double initialRadius, increment, endRadius, volume,currentRadius;
+	bool valuecheck = false;
+
+	while(valuecheck== false){
+	cout<<"enter the intial value of the radius ( in m) : ";
+		cin>>initialRadius;
+
+	cout<<"\nenter the increments for the radius : ";
+		cin>>increment;
+
+	cout<<"\nenter the ending value of the radius ( in m) : ";
+		cin>>endRadius;
+	valuecheck= validateloop(initialRadius,increment,endRadius);
+	}
+
+	currentRadius = initialRadius;
+	cout<<"\n-----------------------------\n";
+
+	for(int i=0; i<= (endRadius-initialRadius)/increment ; i++){
+	volume= VolumeSphere(currentRadius);
+
+		cout<<"The volume of a sphere whith a radius = "<<currentRadius<<
+			" m is : "<<setw(11)<< volume<<" m^3\n";
+	
+		currentRadius = currentRadius + increment;
+	}
+}
+double VolumeSphere(double currentRadius){
+	return ( ( 4 * M_PI * pow(currentRadius, 3) ) / 3 );
+}
+
+bool validateloop(double initialRadius, double increment, double endRadius){
+	if(initialRadius<endRadius && increment > 0){
+		return true;}
+	else if(initialRadius>endRadius && increment < 0){
+		return true;}
+	else{
+		cout<<"**Invalid values entered, please re-try\n";
+		return false;}
+}
+
