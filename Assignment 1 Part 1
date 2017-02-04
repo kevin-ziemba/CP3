@@ -1,0 +1,39 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+//Assignment 1 Part 1
+//Program will ask user to enter a temperature in Farienheit
+//The program will out a list
+// of substance that will freeze or boil
+//at the entered temperature
+
+using namespace std;
+int main() {
+	cout<< "Assignment 1 Problem 1\nFreezing and Boiling Point Comparision\n"
+		<<" ----------------------------\n";
+
+	double temperature;
+	cout<< "Please enter a temperature in degrees F : ";
+	cin>> temperature;  cout << endl;
+
+if ( temperature < -173)
+	cout << "Ethyl alcohol will freeze at "<< temperature<< " degrees F\n";
+if ( temperature > 172)
+	cout << "Ethyl alcohol will boil at "<< temperature<< " degrees F\n";
+
+if ( temperature < -38)
+	cout << "Mercury will freeze at "<< temperature<< " degrees F\n";
+if ( temperature > 676)
+	cout << "Mercury will boil at "<< temperature<< " degrees F\n";
+
+if ( temperature < -362)
+	cout << "Oxygen will freeze at "<< temperature<< " degrees F\n";
+if ( temperature > -306)
+	cout << "Oxygen will boil at "<< temperature<< " degrees F\n";
+
+if ( temperature < 32)
+	cout << "Water will freeze at "<< temperature<< " degrees F\n";
+if ( temperature > 212)
+	cout << "Water will boil at "<< temperature<< " degrees F\n";
+}
