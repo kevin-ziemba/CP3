@@ -1,0 +1,105 @@
+#include <iostream>
+#include <iomanip>
+#include <string.h>
+#include <string>
+#include <ctype.h>
+using namespace std;
+/* Lab 6 part 2 , Inventory Bins
+Program keeps an inventory of 10 bins
+user can add or remove parts to the bin
+parts in bin must be an integer within 0 and 30
+inventory list with edited values will be displayed
+*/
+struct bins{
+	string description;
+	int partsNum;
+};
+bool VerifyAdd ( double p1, int add);
+bool VerifyRemove (double p1, int remove);
+double AddParts ( double p1,int add);
+double RemoveParts ( double p1, int remove);
+
+int main(){
+	char choice;
+	int binModify, modifyNum;
+	const int BINS = 10;
+	bins b[] = {
+		{"Valve", 10},
+		{"Bearing",5},
+		{"Bushing",15},
+		{"Coupling",21},
+		{"Flange",7},
+		{"Gear",5},
+		{"Gear Housing",5},
+		{"Vacuum Griper",25},
+		{"Cable",18},
+		{"Rod",12}
+	};
+
+	do{
+	// Display List
+		cout<<"\n===========================================================\n"
+			<<"BIN#                DESCRIPTION                  # OF PARTS"
+			<<"\n===========================================================\n";		
+		for(int i=0; i< BINS; i++ ){
+		cout<<setw(20)<<left<<i<<setw(29)<<left<<b[i].description<<b[i].partsNum<<endl;
+
+		}
+
+		cout<<"Enter the bin # to modify or -1 to quit : ";
+	cin>>binModify;
+	if(binModify >=0 && binModify <= 9){
+		cout<<"[A]dd or [D]elete items from bin #"<<binModify<<" : ";
+		cin>>choice;
+		choice = toupper(choice);
+		//do{
+			switch (choice){ 
+				case 'A' : do{cout<<"Enter the number of items to add into bin (cannot be negative) : ";
+						cin>>modifyNum; 
+						if(!VerifyAdd(b[binModify].partsNum, modifyNum))
+							cout<<"**Too many parts added, bin cannot have more than 30 parts\n";
+						} while( modifyNum <0 || !VerifyAdd(b[binModify].partsNum, modifyNum));
+
+					b[binModify].partsNum = AddParts(b[binModify].partsNum, modifyNum);
+					break;
+
+				case 'D' :do{ cout<<"Enter the number of items to remove from bin (cannot be negative) : ";
+							cin>>modifyNum; 
+							if(!VerifyRemove(b[binModify].partsNum, modifyNum))
+								cout<<"**Too many parts removed, bin cannot have less than 0 parts\n";
+							} while( modifyNum <0 || !VerifyRemove(b[binModify].partsNum, modifyNum) );
+
+					b[binModify].partsNum = RemoveParts(b[binModify].partsNum, modifyNum);
+					break;
+		
+			default : cout<<"**Invalid choice entered"<<endl;
+				break;
+		}//}while(choice !='A' || choice !='D');
+		}
+	else if (binModify != -1)
+		cout<<"**Invalid bin # entered, Re-enter a bin to modify\n";
+
+
+	}while(binModify != -1);
+}
+
+double AddParts ( double p1,int add){
+	p1 = p1 + add;
+		return p1;
+}
+double RemoveParts ( double p1,int remove){
+	p1 = p1 - remove;
+		return p1;
+}
+bool VerifyAdd ( double p1, int add){
+	if((add + p1) > 30)
+		return false;
+	else
+		return true;
+};
+bool VerifyRemove (double p1, int remove){
+	if((p1-remove) <0)
+		return false;
+	else
+		return true;
+}
