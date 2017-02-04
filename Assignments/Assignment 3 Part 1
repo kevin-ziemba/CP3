@@ -1,0 +1,110 @@
+#include <iostream>
+#include <iomanip>
+#include <fstream>  
+#include <cstring>
+using namespace std;
+// Assignment 3 , program 1
+// Reading data from wavedata.dat,
+// program will determine very steep
+//waves and output the wave's info to
+//  steepness.txt
+//on the console several wave stats
+//for each year is displayed
+struct wavedata{
+int year, month,day, hour, minute;
+double height, length, steepness;
+};
+
+int main() {
+
+	int count2010=0,count2011=0,count2012=0;
+	double totalSteepness2010=0, totalSteepness2011=0, totalSteepness2012=0,
+	steepest2010=0,steepest2011=0,steepest2012=0;
+	int data2010,data2011, data2012;
+	
+	 wavedata w[50];
+
+	 ifstream datfile("wavedata.dat");
+	// cin<<wavedata.year;
+	 if(!datfile){
+		 cout << "\nFile does not exist" << endl;}
+	 else{
+		 ofstream writeFile("steepness.txt", ios::app);
+				writeFile<<"yyyy--mm--dd | hh:mm |WaveHeight(m)|Wavelength(m)|Steepness Ratio\n";
+
+			int i =0;
+			while(!datfile.eof()){
+			datfile>>w[i].year;
+			datfile>>w[i].month;
+			datfile>>w[i].day;
+			datfile>>w[i].hour;
+			datfile>>w[i].minute;
+			datfile>>w[i].height;
+			datfile>>w[i].length;
+			w[i].steepness = w[i].height / w[i].length;
+
+			
+				if( w[i].steepness > 1/7.0 ){
+
+					
+					writeFile<<w[i].year<<"--"<<setw(2)<<w[i].month<<"--"<<setw(2)<<
+						w[i].day<<" | "<<setw(2)<<w[i].hour<<":"<<setw(2)<<
+				w[i].minute<<" | "<<setw(11)<<w[i].height<<" | "<<setw(11)<<
+				w[i].length<<" | "<<setw(14)<<w[i].steepness<<endl;
+					
+				}
+				if(w[i].year == 2010){
+					if(w[i].steepness > steepest2010){
+					steepest2010 = w[i].steepness;
+					data2010 = i;
+					}
+					totalSteepness2010 = totalSteepness2010 + w[i].steepness;
+					count2010++;
+				}
+				if(w[i].year == 2011){
+					if(w[i].steepness > steepest2011){
+					steepest2011 = w[i].steepness;
+					data2011 = i;
+					}
+					totalSteepness2011 = totalSteepness2011 + w[i].steepness;
+					count2011++;
+				}
+				if(w[i].year == 2012){
+					if(w[i].steepness > steepest2012){
+					steepest2012 = w[i].steepness;
+					data2012 = i;
+					}
+					totalSteepness2012 = totalSteepness2012 + w[i].steepness;
+					count2012++;
+				}
+			i++;
+			}
+			
+			
+			cout<<"Format for data is : \n";
+			cout<<"yyyy--mm--dd | hh:mm | WaveHeight(m) | Wavelength(m) | Steepness Ratio\n";
+			cout<<"--------------------------------------";
+			cout<<"\nData for the steepest wave in 2010 : \n"<<
+				w[data2010].year<<"  "<<
+				w[data2010].month<<"  "<<w[data2010].day<<"  "<<w[data2010].hour<<"  "<<
+				w[data2010].minute<<"  "<<w[data2010].height<<"  "<<w[data2010].length<<
+				"  "<<w[data2010].steepness<<endl;
+					cout<<"Average steepness for 2010 is "<<totalSteepness2010 / count2010<<endl;
+			cout<<"--------------------------------------";
+			cout<<"\nData for the steepest wave in 2011 : \n"<<
+				w[data2011].year<<"  "<<
+				w[data2011].month<<"  "<<w[data2011].day<<"  "<<w[data2011].hour<<"  "<<
+				w[data2011].minute<<"  "<<w[data2011].height<<"  "<<w[data2011].length<<
+				"  "<<w[data2011].steepness<<endl;
+					cout<<"Average steepness for 2011 is "<<totalSteepness2011 / count2011<<endl;
+			cout<<"--------------------------------------";
+			cout<<"\nData for the steepest wave in 2012 : \n"<<
+				w[data2012].year<<"  "<<
+				w[data2012].month<<"  "<<w[data2012].day<<"  "<<w[data2012].hour<<"  "<<
+				w[data2012].minute<<"  "<<w[data2012].height<<"  "<<w[data2012].length<<
+				"  "<<w[data2012].steepness<<endl;
+					cout<<"Average steepness for 2012 is "<<totalSteepness2012 / count2012<<endl;
+			cout<<"--------------------------------------"<<endl;
+	}//else brace
+}//main brace
+ 
