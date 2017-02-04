@@ -1,0 +1,40 @@
+ 
+#include <iostream>
+#include <iomanip>
+#define _USE_MATH_DEFINES
+#include <math.h>
+using namespace std;
+//Assignment 2, problem 1
+//User will input starting,ending,incremental
+//values for x, a function will determine
+// sinc(x) , and display a chart of values
+double sinc(double x);
+int main(){
+	double start,increment,end,currentX,sincX;
+	cout<<"Sine Cardinal Calculator\n---------------------\n";
+	cout<<"Enter the starting value of x : ";
+	cin>>start;
+	cout<<"\nEnter the incrementing value of x : ";
+	cin>>increment;
+	cout<<"\nEnter the ending value of x : ";
+	cin>>end;
+	
+	cout<<"\n------------------------\n"<<
+		setw(8)<<left<<"x"<<setw(8)<<"sinc(x)\n";
+
+	currentX=start;
+	for(double i=0; i<=(end-start);i=i+increment){
+		sincX = sinc(currentX);
+	cout<<setw(8)<<left<<currentX<<setw(8)<<sincX<<endl;
+
+	currentX= currentX+increment;
+	}
+}
+
+double sinc(double x){
+if (x==0){
+	return 1;}
+else
+return( sin(x) / x );
+}
+
