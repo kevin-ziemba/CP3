@@ -1,0 +1,97 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+// Assignment 1_Problem 2
+// Program will ask for the number of crew members (1-2) on the flight
+// and the weight of each of the crew members
+// program will output a table of data that contains the
+// weight of the cargo, and center of gravity for each cargo weight
+
+int main () {
+
+	double totalWeight, crewWeight, cargoWeight;
+	double crewNumber, crew1Weight, crew2Weight;
+	
+	crew2Weight = 0, crewNumber = 0;
+
+	const double fuelMoment= 1169167.3 , emptyMoment = 2751405; 
+	double crewMoment, cargoMoment;
+	
+	double COG,MoreThan315; 
+	
+	cout<< "Assignment 1 Problem 2, Aircraft Moment Calculator\n"<<
+		"-----------------------------\n\n";
+
+	do{
+		cout<<"Please enter the number of crew members (1 or 2 only) : ";
+	cin>> crewNumber ;
+		if(crewNumber != 1 && crewNumber != 2)
+			cout<<"Invalid number of crew members entered, re-enter\n";
+	}while(crewNumber != 1 && crewNumber != 2);
+	
+	
+	if(crewNumber==1) {
+		do{
+		cout<<"Please enter the weight of the crew member (85 - 400 pounds only) : ";
+		cin>> crew1Weight;
+		if(crew1Weight < 85 || crew1Weight > 400)
+			cout <<"Invalid weight of crew members entered, re-enter\n";
+		}while (crew1Weight < 85 || crew1Weight > 400);
+	}
+	
+	if(crewNumber==2){
+		do{
+		cout<<"Please enter the weight of the first crew member (85 - 400 pounds only) : ";
+		cin>> crew1Weight;
+		if(crew1Weight < 85 || crew1Weight > 400)
+			cout <<"Invalid weight of crew members entered, re-enter\n";
+		}while (crew1Weight < 85 || crew1Weight > 400);
+
+		do{
+		cout<<"Please enter the weight of the  second crew member (85 - 400 pounds only) : ";
+		cin>> crew2Weight;
+		if(crew2Weight < 85 || crew2Weight > 400)
+			cout <<"Invalid weight of crew members entered, re-enter\n";
+		}while (crew2Weight < 85 || crew2Weight > 400);
+	};
+
+	crewWeight = crew1Weight + crew2Weight;
+	crewMoment = crewWeight * 120;
+	cout<< "------------------------------\n";
+	if(crewNumber==2) {
+	cout<<"The weight of the first crew  member is "<<crew1Weight<<" pounds\n";
+	cout<<"The weight of the second crew  member is "<<crew2Weight<<" pounds\n";
+	}
+	cout<<"The weight of the crew is "<<crewWeight<<" pounds\n";
+	cout<<"Moment Table\n"<<"-----------------------------------\n";
+	;{
+	cout<<setw(19)<<left<< "# of crew"<<setw(19)<<left<<"Cargo Weight"<<setw(19)<<
+		left<<"Centre of Gravity "<<setw(19)<<left<<"  > than 315\n";
+	
+	cout<< setw(19)<<left<<"         "<<setw(19)<<left<< "(lbs)" <<setw(19)<<
+		left<< "(inches)" <<setw(19)<<left<< "(in*lbs)\n";
+	cout<<"----------------------------------------------------\n";
+	cargoWeight=0;
+	}
+	do{
+		totalWeight = 3618 + 9021 + crewWeight + cargoWeight;
+		cargoMoment = cargoWeight * 345;
+		COG = ( fuelMoment + crewMoment + cargoMoment + emptyMoment) / totalWeight;
+		MoreThan315=0;
+		if(COG > 315){
+			MoreThan315=1.0;}
+		
+		cout<<setw(19)<<setprecision(0)<<left<<crewNumber;
+		cout<<fixed;
+		cout<<setw(19)<<left<<setprecision(1)<< cargoWeight;
+		cout<<setw(19)<<left<<setprecision(3)<< COG;
+		if (MoreThan315 == 1){
+			cout<<setw(19)<<left<< "      *";}
+		cout<<endl;
+		cargoWeight=cargoWeight+500.0;
+	}while(cargoWeight <=5000);
+
+}
+
