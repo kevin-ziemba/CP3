@@ -1,0 +1,29 @@
+// Lab#1 Problem 1
+//
+// Program takes the average of 5 values that are in fixed variables
+// The output is displayed on the screen.
+// the program must first sum the values and then take the average
+// The values are : 28,32,37,24,33
+// Written by Kevin Ziemba - September 11,2013
+
+#include <iostream>
+
+using namespace std;
+
+int main ()
+{
+	int number1 = 28;
+	int number2 = 32;
+	int number3 = 37;
+	int number4 = 24;
+	int number5=33;
+
+	int sum  = number1 + number2 + number3 + number4+number5;
+	double average = sum/5.;
+
+	cout << "Lab#1 - Part 1" << endl
+		<< "---------------" << endl <<endl;
+
+	cout << "the average of " << number1 << "," << number2 << ","
+							<< number3 << "," << number4 << "," << number5  <<" = " << average << endl;
+}
